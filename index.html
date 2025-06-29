@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BuyWithBesha.com - أفضل العروض على الإلكترونيات وأدوات المطبخ</title>
+  <title>BuyWithBesha.com - أفضل العروض من أمازون، نون وشي إن</title>
   <style>
     :root {
-      --primary: #232f3e; /* لون مشابه لأمازون */
-      --secondary: #ff9900; /* لون برتقالي مشابه لأمازون */
-      --accent: #e53935; /* لون أحمر للعروض */
-      --light: #f3f3f3;
-      --dark: #131a22;
-      --success: #28a745;
+      --amazon: #232f3e;
+      --noon: #fbbc04;
+      --shein: #ed1c24;
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --success: #27ae60;
       --text: #333;
-      --text-light: #555;
       --border: #ddd;
     }
     
@@ -21,28 +23,28 @@
       font-family: 'Tajawal', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #fafafa;
+      background: #f9f9f9;
       color: var(--text);
-      line-height: 1.5;
-      font-size: 14px;
+      line-height: 1.6;
     }
     
     header {
-      background: linear-gradient(to bottom, var(--primary), var(--dark));
+      background: linear-gradient(135deg, var(--primary), var(--dark));
       color: white;
       padding: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     
     .header-container {
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       justify-content: space-between;
+      align-items: center;
     }
     
     .logo {
@@ -52,93 +54,137 @@
       text-decoration: none;
     }
     
-    .logo span {
-      color: var(--secondary);
+    .platform-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
     }
     
-    .subtitle {
-      font-size: 0.9rem;
-      opacity: 0.9;
+    .platform-tab {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
     }
     
-    section {
+    .platform-tab.active {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .platform-tab[data-platform="amazon"] {
+      background: var(--amazon);
+      color: white;
+    }
+    
+    .platform-tab[data-platform="noon"] {
+      background: var(--noon);
+      color: var(--dark);
+    }
+    
+    .platform-tab[data-platform="shein"] {
+      background: var(--shein);
+      color: white;
+    }
+    
+    .platform-tab[data-platform="all"] {
+      background: white;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .daily-deals {
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      color: white;
       padding: 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      text-align: center;
+      margin: 1rem 0;
+      border-radius: 5px;
+    }
+    
+    .products-section {
+      display: none;
+    }
+    
+    .products-section.active {
+      display: block;
     }
     
     h2 {
       color: var(--primary);
-      font-size: 1.2rem;
-      margin: 1rem 0;
+      border-bottom: 2px solid var(--secondary);
       padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
+      margin: 1.5rem 0 1rem;
       display: flex;
       align-items: center;
+      gap: 0.5rem;
     }
     
-    .products-container {
+    .products {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1rem;
+      padding: 1rem 0;
     }
     
-    .product-card {
+    .product {
       background: white;
-      border-radius: 4px;
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
       border: 1px solid var(--border);
-      position: relative;
     }
     
-    .product-card:hover {
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transform: translateY(-2px);
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     }
     
     .product-badge {
       position: absolute;
       top: 0.5rem;
-      right: 0.5rem;
+      left: 0.5rem;
       background: var(--accent);
       color: white;
-      padding: 0.2rem 0.5rem;
-      border-radius: 3px;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
       font-size: 0.7rem;
       font-weight: bold;
     }
     
-    .product-image {
-      height: 160px;
-      padding: 0.5rem;
+    .product-img-container {
+      height: 180px;
+      padding: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
       border-bottom: 1px solid var(--border);
+      position: relative;
     }
     
-    .product-image img {
+    .product img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
       transition: transform 0.3s ease;
     }
     
-    .product-card:hover .product-image img {
+    .product:hover img {
       transform: scale(1.05);
     }
     
-    .product-details {
-      padding: 0.8rem;
+    .product-content {
+      padding: 1rem;
     }
     
-    .product-title {
-      font-size: 0.9rem;
-      color: var(--text);
+    .product h3 {
       margin: 0 0 0.5rem;
-      height: 2.5rem;
+      font-size: 0.95rem;
+      height: 2.8em;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -157,231 +203,278 @@
     
     .original-price {
       text-decoration: line-through;
-      color: var(--text-light);
+      color: #777;
       font-size: 0.8rem;
-      margin-right: 0.5rem;
+      margin-left: 0.5rem;
     }
     
     .discount {
       color: var(--accent);
-      font-size: 0.8rem;
       font-weight: bold;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-left: 0.5rem;
     }
     
-    .product-actions {
-      margin-top: 0.8rem;
-    }
-    
-    .buy-button {
-      display: block;
-      width: 100%;
-      background: var(--secondary);
-      color: var(--dark);
-      border: none;
-      padding: 0.5rem;
+    .platform-label {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
       border-radius: 3px;
+      font-size: 0.7rem;
       font-weight: bold;
-      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    
+    .amazon-label {
+      background: var(--amazon);
+      color: white;
+    }
+    
+    .noon-label {
+      background: var(--noon);
+      color: var(--dark);
+    }
+    
+    .shein-label {
+      background: var(--shein);
+      color: white;
+    }
+    
+    .product a {
+      display: block;
       text-align: center;
-      font-size: 0.9rem;
-      transition: background 0.2s ease;
+      background: var(--success);
+      color: white;
+      padding: 0.6rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-top: 0.8rem;
+      transition: background 0.3s ease;
     }
     
-    .buy-button:hover {
-      background: #e68a00;
-    }
-    
-    .rating {
-      color: var(--secondary);
-      font-size: 0.8rem;
-      margin: 0.3rem 0;
-    }
-    
-    .stars {
-      color: #ffc107;
+    .product a:hover {
+      background: #219653;
     }
     
     footer {
       background: var(--dark);
       color: white;
+      text-align: center;
       padding: 1.5rem;
       margin-top: 2rem;
-      font-size: 0.8rem;
-    }
-    
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
     }
     
     @media (max-width: 768px) {
-      .products-container {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       }
       
-      .product-image {
-        height: 120px;
+      .header-container {
+        flex-direction: column;
+        align-items: stretch;
       }
       
-      .product-title {
-        font-size: 0.8rem;
-        height: 2.2rem;
+      .platform-tabs {
+        margin-top: 1rem;
+        justify-content: center;
       }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <header>
     <div class="header-container">
-      <a href="#" class="logo">BuyWith<span>Besha</span></a>
-      <div class="subtitle">أفضل العروض اليومية | Daily Best Deals</div>
+      <a href="#" class="logo">BuyWithBesha.com</a>
+      <div class="platform-tabs">
+        <div class="platform-tab active" data-platform="all">جميع المنصات</div>
+        <div class="platform-tab" data-platform="amazon">أمازون</div>
+        <div class="platform-tab" data-platform="noon">نون</div>
+        <div class="platform-tab" data-platform="shein">شي إن</div>
+      </div>
     </div>
   </header>
 
-  <section>
-    <h2><i class="fas fa-mobile-alt"></i> الإلكترونيات | Electronics</h2>
-    <div class="products-container">
-      <!-- المنتج 1 -->
-      <div class="product-card">
+  <div class="daily-deals">
+    <h2><i class="fas fa-bolt"></i> العروض اليومية الحصرية | Today's Exclusive Deals</h2>
+    <p>خصومات تصل إلى 70% لفترة محدودة فقط | Up to 70% off for limited time</p>
+  </div>
+
+  <section id="all-products" class="products-section active">
+    <h2><i class="fas fa-star"></i> أفضل العروض من جميع المنصات | Best Deals from All Platforms</h2>
+    <div class="products">
+      <!-- منتج من أمازون -->
+      <div class="product" data-platform="amazon">
         <div class="product-badge">خصم 20%</div>
-        <div class="product-image">
+        <div class="product-img-container">
           <img src="https://m.media-amazon.com/images/I/61JdLbUXA8L._AC_SX522_.jpg" alt="Bluetooth Headphones">
         </div>
-        <div class="product-details">
-          <h3 class="product-title">سماعة بلوتوث ساوند كور لايف Q30 من انكر</h3>
-          <div class="rating">
-            <span class="stars">★★★★★</span> (127)
-          </div>
+        <div class="product-content">
+          <h3>سماعة بلوتوث ساوند كور لايف Q30 من انكر</h3>
           <div class="product-price">
-            <span class="original-price">312 ر.س</span>
             <span class="current-price">249 ر.س</span>
-            <span class="discount">وفر 20%</span>
+            <span class="original-price">312 ر.س</span>
+            <span class="discount">وفر 63 ر.س</span>
           </div>
-          <div class="product-actions">
-            <a href="https://amzn.to/463WnSz" class="buy-button" target="_blank">أضف إلى السلة</a>
-          </div>
+          <span class="platform-label amazon-label">أمازون</span>
+          <a href="https://amzn.to/463WnSz" target="_blank">اشتري الآن</a>
         </div>
       </div>
       
-      <!-- المنتج 2 -->
-      <div class="product-card">
+      <!-- منتج من نون -->
+      <div class="product" data-platform="noon">
         <div class="product-badge">جديد</div>
-        <div class="product-image">
-          <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg" alt="Laptop">
+        <div class="product-img-container">
+          <img src="https://k.nooncdn.com/t_desktop-pdp-v1/v1590482312/N42181834A_1.jpg" alt="Smart Watch">
         </div>
-        <div class="product-details">
-          <h3 class="product-title">لابتوب ديل انسبايرون 15 - شاشة 15.6 بوصة</h3>
-          <div class="rating">
-            <span class="stars">★★★★☆</span> (89)
-          </div>
+        <div class="product-content">
+          <h3>ساعة ذكية من هواوي واتش جي تي 2 برو</h3>
           <div class="product-price">
-            <span class="current-price">1,899 ر.س</span>
+            <span class="current-price">399 ر.س</span>
+            <span class="original-price">499 ر.س</span>
+            <span class="discount">وفر 100 ر.س</span>
           </div>
-          <div class="product-actions">
-            <a href="#" class="buy-button" target="_blank">أضف إلى السلة</a>
-          </div>
+          <span class="platform-label noon-label">نون</span>
+          <a href="https://www.noon.com/saudi-ar/" target="_blank">اشتري الآن</a>
         </div>
       </div>
       
-      <!-- المنتج 3 -->
-      <div class="product-card">
-        <div class="product-image">
-          <img src="https://m.media-amazon.com/images/I/51Q+-a9oM3L._AC_SL1000_.jpg" alt="Security Camera">
+      <!-- منتج من شي إن -->
+      <div class="product" data-platform="shein">
+        <div class="product-badge">الأكثر مبيعاً</div>
+        <div class="product-img-container">
+          <img src="https://img.ltwebstatic.com/images3_pi/2022/08/16/1660628665d6a3f9d6a5b4b9d8a3c1f0e1b5f0a9_thumbnail_900x.webp" alt="Women's Dress">
         </div>
-        <div class="product-details">
-          <h3 class="product-title">كاميرا مراقبة من TP-Link بدقة 2K</h3>
-          <div class="rating">
-            <span class="stars">★★★★★</span> (214)
-          </div>
+        <div class="product-content">
+          <h3>فساتين نسائية بتصميم أنيق من شي إن</h3>
           <div class="product-price">
-            <span class="original-price">199 ر.س</span>
-            <span class="current-price">179 ر.س</span>
-            <span class="discount">وفر 10%</span>
+            <span class="current-price">59 ر.س</span>
+            <span class="original-price">89 ر.س</span>
+            <span class="discount">وفر 30 ر.س</span>
           </div>
-          <div class="product-actions">
-            <a href="#" class="buy-button" target="_blank">أضف إلى السلة</a>
-          </div>
+          <span class="platform-label shein-label">شي إن</span>
+          <a href="https://ar.shein.com/" target="_blank">اشتري الآن</a>
         </div>
       </div>
+      
+      <!-- المزيد من المنتجات -->
+      <!-- يمكنك إضافة المزيد من المنتجات هنا -->
     </div>
   </section>
 
-  <section>
-    <h2><i class="fas fa-utensils"></i> أدوات المطبخ | Kitchen Tools</h2>
-    <div class="products-container">
-      <!-- المنتج 1 -->
-      <div class="product-card">
-        <div class="product-image">
-          <img src="https://m.media-amazon.com/images/I/71iKn6E-5mL._AC_SL1500_.jpg" alt="Blender">
+  <section id="amazon-products" class="products-section">
+    <h2><i class="fab fa-amazon"></i> أفضل العروض من أمازون | Best Amazon Deals</h2>
+    <div class="products">
+      <!-- منتجات أمازون فقط -->
+      <div class="product" data-platform="amazon">
+        <div class="product-badge">توصيل سريع</div>
+        <div class="product-img-container">
+          <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg" alt="Laptop">
         </div>
-        <div class="product-details">
-          <h3 class="product-title">خلاط فيليبس سوبر بقوة 800 واط</h3>
-          <div class="rating">
-            <span class="stars">★★★★☆</span> (156)
-          </div>
+        <div class="product-content">
+          <h3>لابتوب ديل انسبايرون 15 - شاشة 15.6 بوصة</h3>
           <div class="product-price">
-            <span class="current-price">129 ر.س</span>
+            <span class="current-price">1,899 ر.س</span>
           </div>
-          <div class="product-actions">
-            <a href="#" class="buy-button" target="_blank">أضف إلى السلة</a>
-          </div>
+          <span class="platform-label amazon-label">أمازون</span>
+          <a href="https://www.amazon.sa/" target="_blank">اشتري الآن</a>
         </div>
       </div>
       
-      <!-- المنتج 2 -->
-      <div class="product-card">
-        <div class="product-badge">العرض الأكثر رواجاً</div>
-        <div class="product-image">
-          <img src="https://m.media-amazon.com/images/I/71YHjVXyR0L._AC_SL1500_.jpg" alt="Coffee Maker">
-        </div>
-        <div class="product-details">
-          <h3 class="product-title">ماكينة قهوة ديلونجي إكسبريس بضغط 15 بار</h3>
-          <div class="rating">
-            <span class="stars">★★★★★</span> (342)
-          </div>
-          <div class="product-price">
-            <span class="original-price">399 ر.س</span>
-            <span class="current-price">349 ر.س</span>
-            <span class="discount">وفر 13%</span>
-          </div>
-          <div class="product-actions">
-            <a href="#" class="buy-button" target="_blank">أضف إلى السلة</a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- المنتج 3 -->
-      <div class="product-card">
-        <div class="product-badge">الأفضل مبيعاً</div>
-        <div class="product-image">
-          <img src="https://m.media-amazon.com/images/I/71Xa7ep-+5L._AC_SL1500_.jpg" alt="Air Fryer">
-        </div>
-        <div class="product-details">
-          <h3 class="product-title">مقلاة هوائية من فيليبس سلسلة افانز</h3>
-          <div class="rating">
-            <span class="stars">★★★★☆</span> (278)
-          </div>
-          <div class="product-price">
-            <span class="original-price">329 ر.س</span>
-            <span class="current-price">289 ر.س</span>
-            <span class="discount">وفر 12%</span>
-          </div>
-          <div class="product-actions">
-            <a href="#" class="buy-button" target="_blank">أضف إلى السلة</a>
-          </div>
-        </div>
-      </div>
+      <!-- المزيد من منتجات أمازون -->
     </div>
   </section>
-  
-  <footer>
-    <div class="footer-container">
-      <p>© 2023 BuyWithBesha.com - جميع الحقوق محفوظة</p>
-      <p><i class="fas fa-envelope"></i> info@buywithbesha.com | <i class="fas fa-phone"></i> 920000000</p>
+
+  <section id="noon-products" class="products-section">
+    <h2><i class="fas fa-sun"></i> أفضل العروض من نون | Best Noon Deals</h2>
+    <div class="products">
+      <!-- منتجات نون فقط -->
+      <div class="product" data-platform="noon">
+        <div class="product-badge">عرض محدود</div>
+        <div class="product-img-container">
+          <img src="https://k.nooncdn.com/t_desktop-pdp-v1/v1590482312/N42181834A_1.jpg" alt="Smart Watch">
+        </div>
+        <div class="product-content">
+          <h3>ساعة ذكية من هواوي واتش جي تي 2 برو</h3>
+          <div class="product-price">
+            <span class="current-price">399 ر.س</span>
+            <span class="original-price">499 ر.س</span>
+            <span class="discount">وفر 100 ر.س</span>
+          </div>
+          <span class="platform-label noon-label">نون</span>
+          <a href="https://www.noon.com/saudi-ar/" target="_blank">اشتري الآن</a>
+        </div>
+      </div>
+      
+      <!-- المزيد من منتجات نون -->
     </div>
+  </section>
+
+  <section id="shein-products" class="products-section">
+    <h2><i class="fas fa-tshirt"></i> أفضل العروض من شي إن | Best SHEIN Deals</h2>
+    <div class="products">
+      <!-- منتجات شي إن فقط -->
+      <div class="product" data-platform="shein">
+        <div class="product-badge">تشكيلة جديدة</div>
+        <div class="product-img-container">
+          <img src="https://img.ltwebstatic.com/images3_pi/2022/08/16/1660628665d6a3f9d6a5b4b9d8a3c1f0e1b5f0a9_thumbnail_900x.webp" alt="Women's Dress">
+        </div>
+        <div class="product-content">
+          <h3>فساتين نسائية بتصميم أنيق من شي إن</h3>
+          <div class="product-price">
+            <span class="current-price">59 ر.س</span>
+            <span class="original-price">89 ر.س</span>
+            <span class="discount">وفر 30 ر.س</span>
+          </div>
+          <span class="platform-label shein-label">شي إن</span>
+          <a href="https://ar.shein.com/" target="_blank">اشتري الآن</a>
+        </div>
+      </div>
+      
+      <!-- المزيد من منتجات شي إن -->
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2023 BuyWithBesha.com - جميع الحقوق محفوظة</p>
+    <p>تواصل معنا: info@buywithbesha.com</p>
   </footer>
+
+  <script>
+    // تبديل بين منصات التصفح
+    document.querySelectorAll('.platform-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        // إزالة التنشيط من جميع الألسنة
+        document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
+        // تنشيط اللسان المحدد
+        this.classList.add('active');
+        
+        // إخفاء جميع أقسام المنتجات
+        document.querySelectorAll('.products-section').forEach(section => {
+          section.classList.remove('active');
+        });
+        
+        // إظهار القسم المحدد
+        const platform = this.getAttribute('data-platform');
+        if(platform === 'all') {
+          document.getElementById('all-products').classList.add('active');
+        } else {
+          document.getElementById(`${platform}-products`).classList.add('active');
+        }
+      });
+    });
+    
+    // تأثيرات إضافية عند التمرير
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if(window.scrollY > 50) {
+        header.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+      } else {
+        header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+      }
+    });
+  </script>
 </body>
 </html>
