@@ -1,47 +1,242 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BuyWithBesha</title>
+  <title>BuyWithBesha.com - أفضل المنتجات التقنية وأدوات المطبخ</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
-    header { background: #222; color: #fff; padding: 20px; text-align: center; }
-    h1, h2 { margin: 0 0 10px; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px 0; }
-    .product { background: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 0 5px #ccc; }
-    .product img { width: 100%; height: 200px; object-fit: cover; }
-    .product h3 { margin: 10px 0 5px; }
-    .product p { margin: 0 0 10px; }
-    .product a { display: inline-block; background: #28a745; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; }
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --success: #27ae60;
+    }
+    
+    body {
+      font-family: 'Tajawal', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+    
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+    
+    section {
+      padding: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h2 {
+      color: var(--primary);
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem 0;
+    }
+    
+    .product {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--accent);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    
+    .product-img-container {
+      height: 220px;
+      overflow: hidden;
+    }
+    
+    .product img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .product:hover img {
+      transform: scale(1.05);
+    }
+    
+    .product-content {
+      padding: 1.2rem;
+    }
+    
+    .product h3 {
+      margin: 0 0 0.5rem;
+      color: var(--dark);
+      font-size: 1.2rem;
+    }
+    
+    .product p {
+      margin: 0 0 1rem;
+      color: #666;
+      font-size: 0.95rem;
+    }
+    
+    .product-price {
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: block;
+      font-size: 1.1rem;
+    }
+    
+    .product a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--success);
+      color: white;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+      gap: 0.5rem;
+    }
+    
+    .product a:hover {
+      background: #219653;
+    }
+    
+    .product a::after {
+      content: "→";
+      font-size: 1.2rem;
+    }
+    
+    .lang-toggle {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
+    <button class="lang-toggle">EN</button>
     <h1>BuyWithBesha.com</h1>
-    <p>أفضل المنتجات التقنية وأدوات المطبخ | Best Tech & Kitchen Picks</p>
+    <p class="subtitle">أفضل المنتجات التقنية وأدوات المطبخ | Best Tech & Kitchen Picks</p>
   </header>
 
   <section>
     <h2>📱 الإلكترونيات | Electronics</h2>
     <div class="products">
       <div class="product">
-  <img src="https://m.media-amazon.com/images/I/61JdLbUXA8L._AC_SX522_.jpg" alt="Bluetooth Speaker" width="300">
-  <h3>سماعة بلوتوث | Bluetooth Speaker</h3>
-  <p>سماعة فوق الاذن بلوتوث ساوند كور لايف Q30 من انكر بخاصية الغاء الضوضاء النشطة - اوضاع متعددة وصوت عالي الدقة ووقت تشغيل يدوم لمدة 40 ساعة وشحن سريع ووسائد...| Clear sound, long battery life</p>
-  <a href="https://amzn.to/463WnSz" target="_blank">اشترِ الآن | Buy Now</a>
-</div>
-      <div class="product">
-        <img src="https://via.placeholder.com/250x200?text=Laptop" alt="Laptop">
-        <h3>لابتوب خفيف | Lightweight Laptop</h3>
-        <p>مثالي للطلاب والأعمال | Ideal for students & work</p>
-        <a href="#">اشترِ الآن | Buy Now</a>
+        <div class="product-badge">الأكثر مبيعاً</div>
+        <div class="product-img-container">
+          <img src="https://m.media-amazon.com/images/I/61JdLbUXA8L._AC_SX522_.jpg" alt="Bluetooth Speaker">
+        </div>
+        <div class="product-content">
+          <h3>سماعة بلوتوث | Bluetooth Speaker</h3>
+          <p class="product-price">249 ر.س</p>
+          <p>سماعة فوق الاذن بلوتوث ساوند كور لايف Q30 من انكر بخاصية الغاء الضوضاء النشطة - اوضاع متعددة وصوت عالي الدقة ووقت تشغيل يدوم لمدة 40 ساعة وشحن سريع</p>
+          <a href="https://amzn.to/463WnSz" target="_blank">اشترِ الآن</a>
+        </div>
       </div>
+      
       <div class="product">
-        <img src="https://via.placeholder.com/250x200?text=Camera" alt="Camera">
-        <h3>كاميرا مراقبة | Home Security Camera</h3>
-        <p>أمان عالي وجودة 1080p | High security, 1080p quality</p>
-        <a href="#">اشترِ الآن | Buy Now</a>
+        <div class="product-img-container">
+          <img src="https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg" alt="Lightweight Laptop">
+        </div>
+        <div class="product-content">
+          <h3>لابتوب خفيف | Lightweight Laptop</h3>
+          <p class="product-price">1,899 ر.س</p>
+          <p>لابتوب ديل انسبايرون 15 بوزن 1.7 كجم فقط، معالج كور i5، ذاكرة 8 جيجابايت، تخزين 512 جيجابايت SSD، شاشة 15.6 بوصة فل اتش دي</p>
+          <a href="#" target="_blank">اشترِ الآن</a>
+        </div>
+      </div>
+      
+      <div class="product">
+        <div class="product-badge">جديد</div>
+        <div class="product-img-container">
+          <img src="https://m.media-amazon.com/images/I/51Q+-a9oM3L._AC_SL1000_.jpg" alt="Security Camera">
+        </div>
+        <div class="product-content">
+          <h3>كاميرا مراقبة | Home Security Camera</h3>
+          <p class="product-price">179 ر.س</p>
+          <p>كاميرا مراقبة من TP-Link بدقة 2K مع رؤية ليلية ملونة، كشف حركة ذكي، مقاومة للعوامل الجوية، تخزين سحابي ومحلي</p>
+          <a href="#" target="_blank">اشترِ الآن</a>
+        </div>
       </div>
     </div>
   </section>
@@ -50,24 +245,65 @@
     <h2>🍳 أدوات المطبخ | Kitchen Tools</h2>
     <div class="products">
       <div class="product">
-        <img src="https://via.placeholder.com/250x200?text=Blender" alt="Blender">
-        <h3>خلاط كهربائي | Electric Blender</h3>
-        <p>قوي وسهل التنظيف | Powerful and easy to clean</p>
-        <a href="#">اشترِ الآن | Buy Now</a>
+        <div class="product-img-container">
+          <img src="https://m.media-amazon.com/images/I/71iKn6E-5mL._AC_SL1500_.jpg" alt="Electric Blender">
+        </div>
+        <div class="product-content">
+          <h3>خلاط كهربائي | Electric Blender</h3>
+          <p class="product-price">129 ر.س</p>
+          <p>خلاط فيليبس سوبر خلاط بقوة 800 واط، سعة 2 لتر، مع 4 سرعات ووظيفة النبض، شفرات ستانلس ستيل مقاومة للصدأ</p>
+          <a href="#" target="_blank">اشترِ الآن</a>
+        </div>
       </div>
+      
       <div class="product">
-        <img src="https://via.placeholder.com/250x200?text=Coffee+Machine" alt="Coffee Machine">
-        <h3>ماكينة قهوة | Coffee Maker</h3>
-        <p>استمتع بقهوة طازجة كل يوم | Enjoy fresh coffee daily</p>
-        <a href="#">اشترِ الآن | Buy Now</a>
+        <div class="product-badge">عرض خاص</div>
+        <div class="product-img-container">
+          <img src="https://m.media-amazon.com/images/I/71YHjVXyR0L._AC_SL1500_.jpg" alt="Coffee Maker">
+        </div>
+        <div class="product-content">
+          <h3>ماكينة قهوة | Coffee Maker</h3>
+          <p class="product-price">349 ر.س</p>
+          <p>ماكينة قهوة ديلونجي إكسبريس بضغط 15 بار، خزان ماء 1.1 لتر، مبخر حليب لتحضير الكابتشينو واللاتيه، نظام تسخين سريع</p>
+          <a href="#" target="_blank">اشترِ الآن</a>
+        </div>
       </div>
+      
       <div class="product">
-        <img src="https://via.placeholder.com/250x200?text=Air+Fryer" alt="Air Fryer">
-        <h3>مقلاة هوائية | Air Fryer</h3>
-        <p>طبخ صحي بدون زيت | Healthy frying without oil</p>
-        <a href="#">اشترِ الآن | Buy Now</a>
+        <div class="product-img-container">
+          <img src="https://m.media-amazon.com/images/I/71Xa7ep-+5L._AC_SL1500_.jpg" alt="Air Fryer">
+        </div>
+        <div class="product-content">
+          <h3>مقلاة هوائية | Air Fryer</h3>
+          <p class="product-price">289 ر.س</p>
+          <p>مقلاة هوائية من فيليبس سلسلة افانز بقدرة 2225 واط، سعة 4.1 لتر، تقلل الدهون بنسبة 90%، مع 7 برامج مسبقة</p>
+          <a href="#" target="_blank">اشترِ الآن</a>
+        </div>
       </div>
     </div>
   </section>
+  
+  <footer>
+    <p>© 2023 BuyWithBesha.com - جميع الحقوق محفوظة</p>
+    <p>تواصل معنا: info@buywithbesha.com</p>
+  </footer>
+
+  <script>
+    // Toggle language function
+    document.querySelector('.lang-toggle').addEventListener('click', function() {
+      document.body.style.direction = document.body.style.direction === 'rtl' ? 'ltr' : 'rtl';
+      this.textContent = this.textContent === 'EN' ? 'AR' : 'EN';
+    });
+    
+    // Product hover effect enhancement
+    document.querySelectorAll('.product').forEach(product => {
+      product.addEventListener('mouseenter', function() {
+        this.querySelector('img').style.transform = 'scale(1.05)';
+      });
+      product.addEventListener('mouseleave', function() {
+        this.querySelector('img').style.transform = 'scale(1)';
+      });
+    });
+  </script>
 </body>
 </html>
